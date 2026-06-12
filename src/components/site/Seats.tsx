@@ -21,7 +21,7 @@ export function Seats() {
         </div>
 
         <div className="hairline p-6 md:p-10 bg-card/20">
-          <div className="grid grid-cols-10 sm:grid-cols-15 md:grid-cols-20 gap-1.5">
+          <div className="grid grid-cols-10 sm:grid-cols-12 md:grid-cols-20 gap-1.5">
             {seats.map((i) => {
               const isTaken = taken.has(i);
               const isYours = yours.has(i);
