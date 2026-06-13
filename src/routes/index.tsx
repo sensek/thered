@@ -87,6 +87,8 @@ function Index() {
   };
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const ethereum = window.ethereum;
     if (!ethereum) return;
 

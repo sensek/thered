@@ -26,6 +26,10 @@ export function isContractConfigured() {
 }
 
 export function getEthereumProvider() {
+  if (typeof window === 'undefined') {
+    throw new Error("Cannot access wallet in server environment.");
+  }
+  
   if (!window.ethereum) {
     throw new Error("No wallet found. Please install MetaMask or another EVM wallet.");
   }
@@ -34,6 +38,10 @@ export function getEthereumProvider() {
 }
 
 export async function connectWallet() {
+  if (typeof window === 'undefined') {
+    throw new Error("Wallet connection only available in browser.");
+  }
+  
   const provider = getEthereumProvider();
   await provider.send("eth_requestAccounts", []);
   const signer = await provider.getSigner();
@@ -43,6 +51,10 @@ export async function connectWallet() {
 }
 
 export async function ensureCorrectChain(provider = getEthereumProvider()) {
+  if (typeof window === 'undefined' || !window.ethereum) {
+    return;
+  }
+  
   const network = await provider.getNetwork();
   if (network.chainId === BigInt(MINT_CONFIG.chainId)) return;
 
@@ -54,6 +66,14 @@ export async function ensureCorrectChain(provider = getEthereumProvider()) {
 }
 
 export async function getMintSnapshot(address: string): Promise<MintSnapshot> {
+  if (typeof window === 'undefined') {
+    return {
+      totalMinted: MINT_CONFIG.currentSupply,
+      mintedByWallet: 0,
+      priceEth: MINT_CONFIG.paidPriceEth,
+    };
+  }
+  
   if (!isContractConfigured()) {
     return {
       totalMinted: MINT_CONFIG.currentSupply,
@@ -86,6 +106,10 @@ export function calculateMintCost(quantity: number, mintedByWallet: number) {
 }
 
 export async function mintLedger(quantity: number, mintedByWallet: number) {
+  if (typeof window === 'undefined') {
+    throw new Error("Minting only available in browser.");
+  }
+  
   if (!isContractConfigured()) {
     throw new Error("Contract address is not configured yet.");
   }
