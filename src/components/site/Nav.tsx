@@ -1,7 +1,7 @@
 interface NavProps {
   connected: boolean;
   address: string | null;
-  onConnect: () => void;
+  onConnect: () => void | Promise<void>;
 }
 
 export function Nav({ connected, address, onConnect }: NavProps) {
@@ -10,11 +10,12 @@ export function Nav({ connected, address, onConnect }: NavProps) {
       <div className="max-w-7xl mx-auto grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between gap-4">
         <a href="#" className="flex items-center gap-3 min-w-0">
           <span className="w-2 h-2 bg-blood animate-door-glow shrink-0" />
-          <span className="font-display text-lg text-bone truncate tracking-wider">THE LAST TICKET</span>
+          <span className="font-display text-lg text-bone truncate tracking-wider">THE RED LEDGER</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8 font-mono text-[10px] tracking-[0.25em] text-ash uppercase">
           <a href="#mint" className="hover:text-bone transition-colors">Mint</a>
+          <a href="#ledger" className="hover:text-bone transition-colors">Ledger</a>
           <a href="#burn" className="hover:text-bone transition-colors">Burn</a>
           <a href="#faq" className="hover:text-bone transition-colors">FAQ</a>
         </div>

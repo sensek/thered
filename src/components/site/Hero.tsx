@@ -1,14 +1,15 @@
-import ticketImg from "@/assets/ticket.jpg";
+import ledgerImg from "@/assets/ticket.jpg";
 import { MINT_CONFIG } from "@/lib/mint-config";
 
 interface HeroProps {
-  onConnect: () => void;
+  onConnect: () => void | Promise<void>;
   onMint: () => void;
   connected: boolean;
+  currentSupply: number;
 }
 
-export function Hero({ onConnect, onMint, connected }: HeroProps) {
-  const pct = (MINT_CONFIG.currentSupply / MINT_CONFIG.totalSupply) * 100;
+export function Hero({ onConnect, onMint, connected, currentSupply }: HeroProps) {
+  const pct = (currentSupply / MINT_CONFIG.totalSupply) * 100;
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-20 overflow-hidden">
@@ -27,18 +28,17 @@ export function Hero({ onConnect, onMint, connected }: HeroProps) {
           <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.9] tracking-tight text-bone text-shadow-blood animate-flicker">
             THE
             <br />
-            LAST
+            RED
             <br />
-            <span className="text-blood italic">TICKET</span>
+            <span className="text-blood italic">LEDGER</span>
           </h1>
 
           <p className="mt-8 font-display italic text-2xl md:text-3xl text-bone/80">
-            同一张票，不同的座位。
+            One book. Every entry remembered.
           </p>
 
           <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
-            A single image. Thousands of seats. When the final ticket is claimed,
-            the door opens.
+            One book. 6,666 copies. The eye remembers every owner.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -52,7 +52,7 @@ export function Hero({ onConnect, onMint, connected }: HeroProps) {
               onClick={onMint}
               className="group relative px-8 py-4 bg-blood text-bone font-mono text-xs tracking-[0.25em] uppercase transition-all hover:blood-glow hover:bg-[color:var(--blood-glow)]"
             >
-              Mint Ticket →
+              Mint Ledger →
             </button>
           </div>
 
@@ -61,8 +61,8 @@ export function Hero({ onConnect, onMint, connected }: HeroProps) {
             {[
               ["Free Mint", "1 / wallet"],
               ["Extra Mint", `${MINT_CONFIG.paidPriceEth} ETH`],
-              ["Burn 3", "→ Door Key"],
-              ["Supply", `${MINT_CONFIG.currentSupply} / ${MINT_CONFIG.totalSupply}`],
+              ["Burn 3", "→ Red Key"],
+              ["Supply", `${currentSupply} / ${MINT_CONFIG.totalSupply}`],
             ].map(([k, v]) => (
               <div key={k} className="bg-background p-4">
                 <div className="font-mono text-[10px] tracking-[0.2em] text-ash uppercase">{k}</div>
@@ -85,20 +85,20 @@ export function Hero({ onConnect, onMint, connected }: HeroProps) {
           </div>
         </div>
 
-        {/* Right: ticket */}
+        {/* Right: ledger */}
         <div className="relative flex justify-center">
           <div className="absolute inset-0 bg-blood opacity-10 blur-3xl" />
           <div className="relative hairline-blood p-4 bg-card/40 backdrop-blur-sm animate-float blood-glow">
             <img
-              src={ticketImg}
-              alt="The Last Ticket — the single image every holder receives"
+              src={ledgerImg}
+              alt="The Red Ledger — the single image every holder receives"
               width={1024}
               height={1024}
               className="w-full max-w-md aspect-square object-cover grayscale-[0.2] contrast-110"
             />
             <div className="mt-4 flex justify-between font-mono text-[10px] tracking-[0.2em] text-ash uppercase">
-              <span>Seat No. ████</span>
-              <span>Admit One</span>
+              <span>Ledger No. ████</span>
+              <span>Eye Witness</span>
             </div>
           </div>
         </div>

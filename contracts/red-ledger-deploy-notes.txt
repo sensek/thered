@@ -1,0 +1,18 @@
+The Red Ledger deployment notes
+
+Shared metadata URI:
+ipfs://bafkreigo4qsc2op5hm4l2pxlqf7bfljvvf464benvfr2mh7gzbu4yaqvfq
+
+The metadata URI is now hardcoded in TheRedLedgerNFT.sol:
+ipfs://bafkreigo4qsc2op5hm4l2pxlqf7bfljvvf464benvfr2mh7gzbu4yaqvfq
+
+Deploy constructor arguments:
+none
+
+Deploy value:
+0 ETH
+
+Website config to update after deployment:
+- contractAddress
+- chainId
+- chainName

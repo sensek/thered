@@ -2,10 +2,10 @@ import doorImg from "@/assets/door.jpg";
 
 export function Burn() {
   const flow = [
-    { k: "01", l: "Mint Ticket" },
+    { k: "01", l: "Mint Ledger" },
     { k: "02", l: "Hold Three" },
     { k: "03", l: "Burn" },
-    { k: "04", l: "Claim Door Key" },
+    { k: "04", l: "Claim Red Key" },
     { k: "05", l: "Phase II" },
   ];
 
@@ -34,8 +34,8 @@ export function Burn() {
           </h2>
 
           <p className="mt-8 text-lg text-muted-foreground leading-relaxed">
-            Holders of three Tickets may, in time, burn them in exchange for a single
-            Door Key — the credential of the second act.
+            Holders of three Ledgers may, in time, burn them in exchange for a single
+            Red Key — the credential of the second act.
           </p>
           <p className="mt-4 text-sm text-ash leading-relaxed italic">
             This is a narrative mechanism, not a financial instrument. No yield is

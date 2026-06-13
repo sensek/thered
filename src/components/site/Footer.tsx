@@ -15,11 +15,11 @@ export function Footer() {
           <div>
             <div className="font-mono text-[10px] tracking-[0.3em] text-ash uppercase">— Coda —</div>
             <h3 className="mt-4 font-display text-4xl md:text-6xl text-bone leading-[0.95]">
-              THE LAST<br />
-              <span className="italic text-blood">TICKET</span>
+              THE RED<br />
+              <span className="italic text-blood">LEDGER</span>
             </h3>
             <p className="mt-4 text-muted-foreground max-w-md">
-              A one-image NFT event. The door opens when the last seat is claimed.
+              A one-image NFT event. The sealed page opens when the last entry is claimed.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export function Footer() {
         </div>
 
         <div className="mt-20 pt-6 border-t border-border/40 flex flex-col sm:flex-row justify-between gap-2 font-mono text-[10px] tracking-[0.2em] text-ash uppercase">
-          <span>© MMXXVI · The Last Ticket</span>
+          <span>© MMXXVI · The Red Ledger</span>
           <span className="truncate">Contract · {MINT_CONFIG.contractAddress.slice(0, 10)}…{MINT_CONFIG.contractAddress.slice(-6)}</span>
         </div>
       </div>

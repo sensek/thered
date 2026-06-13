@@ -1,18 +1,21 @@
-// Configuration constants — replace with on-chain values when wiring the contract.
+// Replace contractAddress after deploying The Red Ledger contract.
 export const MINT_CONFIG = {
-  name: "THE LAST TICKET",
-  totalSupply: 10000,
-  currentSupply: 1487, // placeholder, replace with contract read
+  name: "THE RED LEDGER",
+  tokenName: "The Red Ledger",
+  symbol: "LEDGER",
+  totalSupply: 6666,
+  currentSupply: 0,
   freePerWallet: 1,
-  paidPriceEth: 0.005,
+  paidPriceEth: "0.0001",
   burnRequired: 3,
-  contractAddress: "0x0000000000000000000000000000000000000000",
+  contractAddress: "0xEf639e28e3eFB05888CaF479C334FAFD011fEF8A",
+  chainId: 1,
   chainName: "Ethereum",
   links: {
     twitter: "#",
     discord: "#",
     opensea: "#",
-    contract: "#",
+    contract: "https://etherscan.io/address/0xef639e28e3efb05888caf479c334fafd011fef8a",
   },
 } as const;
 

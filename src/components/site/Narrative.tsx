@@ -2,21 +2,21 @@ export function Narrative() {
   const stages = [
     {
       n: "I",
-      title: "One Ticket",
-      tag: "You are on the list.",
-      body: "A single image lands in your wallet. The ushers know your name.",
+      title: "One Ledger",
+      tag: "The eye records you.",
+      body: "A single image lands in your wallet. The red book remembers the address.",
     },
     {
       n: "II",
-      title: "Three Tickets",
-      tag: "You may open the door.",
-      body: "Three seats held by one hand. A key can be forged from what you burn.",
+      title: "Three Ledgers",
+      tag: "You may reveal the key.",
+      body: "Three copies held by one hand. A key can be revealed from what you burn.",
     },
     {
       n: "III",
-      title: "Final Ticket",
+      title: "Final Entry",
       tag: "The story begins.",
-      body: "When the last admission is claimed, the second act is no longer a rumor.",
+      body: "When the last copy is claimed, the sealed page is no longer a rumor.",
     },
   ];
 
@@ -30,8 +30,8 @@ export function Narrative() {
             <span className="italic text-blood">A Collection.</span>
           </h2>
           <p className="mt-8 text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            Every NFT is the same ticket, because everyone is entering the same door.
-            The difference is not in the picture — it is in the seat number, the count
+            Every NFT is the same book, because everyone is written into the same ledger.
+            The difference is not in the picture — it is in the token number, the count
             in your wallet, and whether you choose to burn them.
           </p>
         </div>

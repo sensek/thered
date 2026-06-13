@@ -3,23 +3,23 @@ import { useState } from "react";
 const items = [
   {
     q: "Why is there only one image?",
-    a: "Because this is not a collection of pictures. It is a single event, and every ticket is proof of attendance. The image is the door. The seat number is yours.",
+    a: "Because this is not a collection of pictures. It is a single event, and every Ledger is proof that one address was recorded. The image is the book. The token number is yours.",
   },
   {
     q: "Why mint more than one?",
-    a: "One ticket places you in the room. Three tickets give you the option to forge a Door Key when the burn opens — the credential required for the second act.",
+    a: "One Ledger records you. Three Ledgers give you the option to claim a Red Key when the burn opens — the credential required for the second act.",
   },
   {
     q: "What happens when I hold 3?",
-    a: "You will be able to burn three Tickets in exchange for one Door Key. The burn is a narrative ritual, not a yield mechanism. Hold them, or give them up.",
+    a: "You will be able to burn three Ledgers in exchange for one Red Key. The burn is a narrative ritual, not a yield mechanism. Hold them, or give them up.",
   },
   {
     q: "Is there a token?",
     a: "No fungible token. No price promise. No roadmap of returns. The only currency here is attention and the act of showing up.",
   },
   {
-    q: "When does the door open?",
-    a: "When the final ticket is claimed. Not before. The supply is the clock.",
+    q: "When does the sealed page open?",
+    a: "When the final Ledger is claimed. Not before. The supply is the clock.",
   },
 ];
 
@@ -32,7 +32,7 @@ export function Faq() {
         <div className="text-center mb-16">
           <div className="font-mono text-[10px] tracking-[0.3em] text-ash uppercase">— 05 / The Questions —</div>
           <h2 className="mt-4 font-display text-5xl md:text-6xl text-bone">
-            Before You <span className="italic text-blood">Enter</span>
+            Before You <span className="italic text-blood">Sign</span>
           </h2>
         </div>
 
