@@ -49,15 +49,22 @@ function Index() {
   }, []);
 
   const handleConnect = useCallback(async () => {
+    let walletAddress: string;
     try {
       setWalletError(null);
-      const walletAddress = await connectWallet();
+      walletAddress = await connectWallet();
       setConnected(true);
       setAddress(walletAddress);
-      await refreshSnapshot(walletAddress);
     } catch (error) {
       setConnected(false);
       setWalletError(error instanceof Error ? error.message : "Wallet connection failed.");
+      return;
+    }
+
+    try {
+      await refreshSnapshot(walletAddress);
+    } catch (error) {
+      setWalletError(error instanceof Error ? error.message : "Could not fetch contract data.");
     }
   }, [refreshSnapshot]);
 
