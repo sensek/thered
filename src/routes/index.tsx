@@ -49,21 +49,28 @@ function Index() {
   }, []);
 
   const handleConnect = useCallback(async () => {
+    console.log('[handleConnect] Starting wallet connection...');
     let walletAddress: string;
     try {
       setWalletError(null);
+      console.log('[handleConnect] Calling connectWallet()...');
       walletAddress = await connectWallet();
+      console.log('[handleConnect] Wallet connected:', walletAddress);
       setConnected(true);
       setAddress(walletAddress);
     } catch (error) {
+      console.error('[handleConnect] Connection failed:', error);
       setConnected(false);
       setWalletError(error instanceof Error ? error.message : "Wallet connection failed.");
       return;
     }
 
     try {
+      console.log('[handleConnect] Refreshing snapshot...');
       await refreshSnapshot(walletAddress);
+      console.log('[handleConnect] Snapshot refreshed');
     } catch (error) {
+      console.error('[handleConnect] Snapshot refresh failed:', error);
       setWalletError(error instanceof Error ? error.message : "Could not fetch contract data.");
     }
   }, [refreshSnapshot]);

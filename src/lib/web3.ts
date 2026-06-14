@@ -26,28 +26,41 @@ export function isContractConfigured() {
 }
 
 export function getEthereumProvider() {
+  console.log('[getEthereumProvider] Checking window...');
   if (typeof window === 'undefined') {
+    console.error('[getEthereumProvider] Window is undefined (server-side)');
     throw new Error("Cannot access wallet in server environment.");
   }
   
+  console.log('[getEthereumProvider] Checking window.ethereum...');
   if (!window.ethereum) {
+    console.error('[getEthereumProvider] window.ethereum not found');
     throw new Error("No wallet found. Please install MetaMask or another EVM wallet.");
   }
 
+  console.log('[getEthereumProvider] Creating BrowserProvider...');
   return new BrowserProvider(window.ethereum);
 }
 
 export async function connectWallet() {
+  console.log('[connectWallet] Checking environment...');
   if (typeof window === 'undefined') {
+    console.error('[connectWallet] Running in server environment!');
     throw new Error("Wallet connection only available in browser.");
   }
   
+  console.log('[connectWallet] Getting provider...');
   const provider = getEthereumProvider();
+  console.log('[connectWallet] Requesting accounts...');
   await provider.send("eth_requestAccounts", []);
+  console.log('[connectWallet] Getting signer...');
   const signer = await provider.getSigner();
+  console.log('[connectWallet] Ensuring correct chain...');
   await ensureCorrectChain(provider);
 
-  return signer.getAddress();
+  const address = await signer.getAddress();
+  console.log('[connectWallet] Connected successfully:', address);
+  return address;
 }
 
 export async function ensureCorrectChain(provider = getEthereumProvider()) {
