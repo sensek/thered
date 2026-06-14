@@ -32,30 +32,46 @@ export function getEthereumProvider() {
     throw new Error("Cannot access wallet in server environment.");
   }
   
-  console.log('[getEthereumProvider] Checking available wallets...');
+  console.log('[getEthereumProvider] Detecting available wallets...');
   
-  // 检查多种钱包提供者
-  // OKX Wallet
-  if ((window as any).okxwallet) {
-    console.log('[getEthereumProvider] Found OKX Wallet');
-    return new BrowserProvider((window as any).okxwallet);
+  // 列出所有可用的钱包
+  const wallets = {
+    okxwallet: (window as any).okxwallet,
+    ethereum: (window as any).ethereum,
+    coinbase: (window as any).coinbaseWalletExtension,
+  };
+  
+  console.log('[getEthereumProvider] Available wallets:', {
+    okxwallet: !!wallets.okxwallet,
+    ethereum: !!wallets.ethereum,
+    coinbase: !!wallets.coinbase,
+  });
+  
+  // 优先使用 OKX
+  if (wallets.okxwallet) {
+    console.log('[getEthereumProvider] Using OKX Wallet');
+    return new BrowserProvider(wallets.okxwallet);
   }
   
-  // MetaMask or other standard wallets
-  if (window.ethereum) {
-    console.log('[getEthereumProvider] Found standard ethereum provider');
-    return new BrowserProvider(window.ethereum);
+  // 然后是标准 ethereum 提供者
+  if (wallets.ethereum) {
+    console.log('[getEthereumProvider] Using standard Ethereum provider');
+    // 检查是否是 MetaMask
+    if (wallets.ethereum.isMetaMask) {
+      console.log('[getEthereumProvider] Detected MetaMask');
+    }
+    return new BrowserProvider(wallets.ethereum);
   }
   
-  // Coinbase Wallet
-  if ((window as any).coinbaseWalletExtension) {
-    console.log('[getEthereumProvider] Found Coinbase Wallet');
-    return new BrowserProvider((window as any).coinbaseWalletExtension);
+  // Coinbase
+  if (wallets.coinbase) {
+    console.log('[getEthereumProvider] Using Coinbase Wallet');
+    return new BrowserProvider(wallets.coinbase);
   }
   
-  console.error('[getEthereumProvider] No wallet found');
+  console.error('[getEthereumProvider] No wallet provider found');
   throw new Error(
-    "No Web3 wallet detected. Please install MetaMask, OKX Wallet, or another compatible wallet extension."
+    "No Web3 wallet detected. Please install MetaMask, OKX Wallet, or another compatible wallet extension and refresh the page."
   );
 }
 
