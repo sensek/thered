@@ -32,14 +32,31 @@ export function getEthereumProvider() {
     throw new Error("Cannot access wallet in server environment.");
   }
   
-  console.log('[getEthereumProvider] Checking window.ethereum...');
-  if (!window.ethereum) {
-    console.error('[getEthereumProvider] window.ethereum not found');
-    throw new Error("No wallet found. Please install MetaMask or another EVM wallet.");
+  console.log('[getEthereumProvider] Checking available wallets...');
+  
+  // 检查多种钱包提供者
+  // OKX Wallet
+  if ((window as any).okxwallet) {
+    console.log('[getEthereumProvider] Found OKX Wallet');
+    return new BrowserProvider((window as any).okxwallet);
   }
-
-  console.log('[getEthereumProvider] Creating BrowserProvider...');
-  return new BrowserProvider(window.ethereum);
+  
+  // MetaMask or other standard wallets
+  if (window.ethereum) {
+    console.log('[getEthereumProvider] Found standard ethereum provider');
+    return new BrowserProvider(window.ethereum);
+  }
+  
+  // Coinbase Wallet
+  if ((window as any).coinbaseWalletExtension) {
+    console.log('[getEthereumProvider] Found Coinbase Wallet');
+    return new BrowserProvider((window as any).coinbaseWalletExtension);
+  }
+  
+  console.error('[getEthereumProvider] No wallet found');
+  throw new Error(
+    "No Web3 wallet detected. Please install MetaMask, OKX Wallet, or another compatible wallet extension."
+  );
 }
 
 export async function connectWallet() {
